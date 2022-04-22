@@ -1,0 +1,37 @@
+---
+# tasks file for ansible-safenet
+# SafeNet
+- name: Unarchive safenet
+  ansible.builtin.unarchive:
+    src: https://www.digicert.com/StaticFiles/SAC_10_7_Linux_GA.zip
+    dest: /tmp/
+    remote_src: yes
+    # extra_opts:
+    # - --strip-components=1
+  tags: safenet
+
+# - name: Install a .deb package for Safenet client core Linux x64
+#   apt:
+#     deb: /tmp/Installation/withoutUI/DEB/safenetauthenticationclient-core_10.7.77_amd64.deb
+#   when: ansible_os_family == 'Debian' and ansible_architecture == 'x86_64'
+#   tags: safenet
+
+# - name: Install a .deb package for Safenet client core Linux x86
+#   apt:
+#     deb: /tmp/Installation/withoutUI/DEB/safenetauthenticationclient-core_10.7.77_i386.deb
+#   when: ansible_os_family == 'Debian' and ansible_architecture == 'i386'
+#   tags: safenet
+
+- name: Install a .deb package for Safenet client Linux x64
+  apt:
+    deb: /tmp/Installation/Standard/DEB/safenetauthenticationclient_10.7.77_amd64.deb
+  when: ansible_os_family == 'Debian' and ansible_architecture == 'x86_64'
+  tags: safenet
+
+- name: Install a .deb package for Safenet client Linux x86
+  apt:
+    deb: /tmp/Installation/Standard/DEB/safenetauthenticationclient_10.7.77_i386.deb
+  when: ansible_os_family == 'Debian' and ansible_architecture == 'i386'
+  tags: safenet
+
+# https://github.com/Synehan/safenet-linux
